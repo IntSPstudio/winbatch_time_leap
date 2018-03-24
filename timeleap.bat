@@ -2,7 +2,7 @@
 REM Made by IntSPstudio
 REM Time Leap
 REM Thank you for using this software!
-REM Version: 0.0.3.20172403
+REM Version: 0.0.4.20172503
 REM ID: 720002001
 REM Twitter: @IntSPstudio
 
@@ -30,13 +30,15 @@ for /l %%i in (1,1,%loopcounter%) do (
 	REM CHANGE TIME
 	if %debugger%==0 (
 		time !ctime!
+		echo %%i / %loopcounter%
 	) else (
-		echo !ctime!
+		echo %%i / %loopcounter% - !ctime!
 	)
 	REM PAUSE
-	timeout /t %timeinterval%
+	timeout /t %timeinterval% /nobreak > NUL
 )
 REM BACK TO NORMAL
+echo.
 echo Changing time to normal
 if %debugger%==0 (
 pause
