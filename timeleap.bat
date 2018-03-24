@@ -9,13 +9,11 @@ REM Twitter: @IntSPstudio
 
 REM SETTINGS
 setlocal enabledelayedexpansion
-set /a timeinterval=%1
-set /a loopcounter=%2
+set /p timeinterval="Time intervall: "
+set /p loopcounter="Loop counter: "
 set currenthour=%time: =0%
 set /a currenthour=%currenthour:~0,2%
-REM START INFO
-echo Time interval: %timeinterval%
-echo Loop counter: %loopcounter%
+set /a debugger=0
 REM MAIN LOOP
 for /l %%i in (1,1,%loopcounter%) do (
 	REM 'FAKE' HOUR VALUE
@@ -23,7 +21,7 @@ for /l %%i in (1,1,%loopcounter%) do (
 	REM GET TIME
 	set ctime=!fhh!.!time:~3,2!.!time:~6,2!,!time:~9,2!
 	REM CHANGE TIME
-	time !ctime!
+	if %debugger%==0 (time !ctime!)
 	REM PAUSE
 	timeout /t %timeinterval%
 )
@@ -32,4 +30,4 @@ echo Changing time to normal
 pause
 set /a fhh=%currenthour%
 set ltime=!fhh!.!time:~3,2!.!time:~6,2!,!time:~9,2!
-time !ltime!
+if %debugger%==0 (time !ltime!)
